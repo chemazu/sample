@@ -1,5 +1,4 @@
 const { Router } = require("express");
-// const { home } = require("../controllers/controller");
 const {
   getSample,
   getSamples,
@@ -10,7 +9,7 @@ const {
 const router = Router();
 
 router.get("/", (req, res) => {
-  res.send({ mssg: "dam" });
+  res.send({ msg: "home route" });
 });
 router.get("/samples", getSamples);
 router.get("/sample/:id", getSample);

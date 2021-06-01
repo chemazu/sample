@@ -1,4 +1,4 @@
-const Sample = require("../model/Sample.model");
+const Sample = require("../models/Sample.model");
 
 module.exports = {
   createSample: async (req, res, next) => {
