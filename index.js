@@ -5,6 +5,7 @@ const app = express();
 const dotenv = require("dotenv");
 const cors = require("cors");
 const mongoose = require("mongoose");
+const errorHandler = require("./middleware/error");
 
 dotenv.config();
 app.use(cors());
@@ -24,6 +25,9 @@ mongoose
   });
 
 app.use("/", require("./routes/routes"));
+app.use("/", require("./routes/user"));
+
+app.use(errorHandler);
 
 app.listen(PORT, () => {
   console.log(`currently running on ${PORT}`);
