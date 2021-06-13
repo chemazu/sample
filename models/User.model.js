@@ -51,10 +51,11 @@ const User = new Schema(
   }
 );
 
-User.virtual("virtual", {
-  ref: "sample ",
+User.virtual("samples", {
+  ref: "sample",
   localField: "_id",
   foreignField: "user",
+  justOne: false,
 });
 const user = mongoose.model("user", User);
 

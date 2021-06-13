@@ -1,4 +1,4 @@
-const asyncHandler = require("../middleware/aysnc");
+const asyncHandler = require("../middleware/async");
 const User = require("../models/User.model");
 const ErrorResponse = require("../utils/errorResponse");
 
@@ -15,5 +15,9 @@ module.exports = {
     } catch (error) {
       console.log(error);
     }
+  },
+  getUser: async (req, res, next) => {
+    const user = await User.findById(req.params.id).populate("samples");
+    res.send(user);
   },
 };
