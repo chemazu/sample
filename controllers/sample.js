@@ -13,10 +13,9 @@ module.exports = {
     } catch (error) {
       console.log(error);
     }
-    next();
+    next(new ErrorResponse(`Error in creating new Sample`, 500));
   },
   getSamples: asyncHandler(async (req, res, next) => {
-    // console.log(res.advancedResults);
     res.status(200).json(res.advancedResults);
   }),
   getSample: async (req, res, next) => {
@@ -63,5 +62,8 @@ module.exports = {
     } catch (error) {
       console.log(error);
     }
+  },
+  tryMiddle: () => {
+    console.log("trymiddle");
   },
 };

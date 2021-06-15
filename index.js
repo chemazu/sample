@@ -1,5 +1,4 @@
 const express = require("express");
-
 const PORT = process.env.PORT || 5000;
 const app = express();
 const dotenv = require("dotenv");
@@ -23,7 +22,6 @@ mongoose
   .catch((err) => {
     console.log("the error is", err);
   });
-
 app.use("/", require("./routes/routes"));
 app.use("/", require("./routes/user"));
 
