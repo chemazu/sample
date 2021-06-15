@@ -1,19 +1,16 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
-const Sample = new Schema({
+const Book = new Schema({
   title: String,
-  description: String,
-  image: String,
+  color: String,
   createdAt: {
     type: Date,
     default: Date.now,
   },
-  user: {
+  sample: {
     type: mongoose.Schema.ObjectId,
-    ref: "user",
+    ref: "sample",
   },
 });
-
-const sample = mongoose.model("sample", Sample);
-
-module.exports = sample;
+const book = mongoose.model("book", Book);
+module.exports = book;
