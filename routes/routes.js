@@ -8,7 +8,6 @@ const {
   createSample,
   updateSample,
   deleteSample,
-  tryMiddle,
   samplePhotoUpload,
 } = require("../controllers/sample");
 const router = Router();
@@ -19,7 +18,6 @@ router.get(
 );
 router.get("/sample/:id", getSample);
 router.post("/addsample", createSample);
-router.get("/try", logger("potatoes"), tryMiddle); // for middleware
 router.put("/updatesample/:id", updateSample);
 router.delete("/deletesample/:id", deleteSample);
 router.put("/:id/upload", samplePhotoUpload);

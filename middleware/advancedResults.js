@@ -1,11 +1,12 @@
 const ErrorResponse = require("../utils/errorResponse");
 const advancedResults = (model, populate) => async (req, res, next) => {
-  const reqQuery = { ...req.query };
+  const reqQuery = { ...req.query }; //query can be gotten after you put a ?... ie ?select=rg,the first query starts with ? and subsequent ones have&
   const removeFields = ["select", "sort", "page", "limit"];
   removeFields.forEach((param) => delete reqQuery[param]);
   let query;
   query = model.find(reqQuery);
   //select
+  //selects what fields will be returned by the json file
   if (req.query.select) {
     const fields = req.query.select.split(",").join(" ");
     query = query.select(fields);

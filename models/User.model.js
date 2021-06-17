@@ -32,6 +32,8 @@ const User = new Schema(
       trim: true,
       minlength: [8, "Must be more than 8 Characters"],
     },
+    resetPasswordToke: String,
+    resetPasswordExpire: Date,
     createdAt: {
       type: Date,
       default: Date.now,
