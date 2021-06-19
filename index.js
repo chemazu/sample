@@ -31,7 +31,7 @@ app.use(fileupload());
 
 app.use(express.static(path.join(__dirname, "public")));
 app.use("/", require("./routes/routes"));
-app.use("/", require("./routes/user"));
+app.use("/", require("./routes/auth"));
 
 app.use(errorHandler);
 

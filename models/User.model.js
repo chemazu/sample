@@ -1,5 +1,7 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
+const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
 const User = new Schema(
   {
     name: {
@@ -31,6 +33,7 @@ const User = new Schema(
       required: [true, "please add a message"],
       trim: true,
       minlength: [8, "Must be more than 8 Characters"],
+      select: false,
     },
     resetPasswordToke: String,
     resetPasswordExpire: Date,
@@ -59,6 +62,17 @@ User.virtual("samples", {
   foreignField: "user",
   justOne: false,
 });
-const user = mongoose.model("user", User);
-
-module.exports = user;
+User.pre("save", async function (next) {
+  const salt = await bcrypt.genSalt(10);
+  this.password = await bcrypt.hash(this.password, salt);
+});
+User.methods.getSignedJwtToken = function () {
+  return jwt.sign({ id: this._id }, process.env.JWT_SECRET, {
+    expiresIn: process.env.JWT_EXPIRE,
+  });
+};
+User.methods.matchPassword = async function (enteredPassword) {
+  return await bcrypt.compare(enteredPassword, this.password);
+  console.log(enteredPassword);
+};
+module.exports = mongoose.model("user", User);
