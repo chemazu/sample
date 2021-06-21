@@ -5,6 +5,7 @@ const app = express();
 const dotenv = require("dotenv");
 const cors = require("cors");
 const mongoose = require("mongoose");
+// const cookieParser = require("cookie-parser");
 const fileupload = require("express-fileupload");
 const errorHandler = require("./middleware/error");
 
@@ -28,12 +29,12 @@ mongoose
 
 //file upload
 app.use(fileupload());
+app.use(errorHandler);
+// app.use(cookieParser());
 
 app.use(express.static(path.join(__dirname, "public")));
 app.use("/", require("./routes/routes"));
 app.use("/", require("./routes/auth"));
-
-app.use(errorHandler);
 
 app.listen(PORT, () => {
   console.log(`currently running on ${PORT}`);

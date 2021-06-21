@@ -73,6 +73,5 @@ User.methods.getSignedJwtToken = function () {
 };
 User.methods.matchPassword = async function (enteredPassword) {
   return await bcrypt.compare(enteredPassword, this.password);
-  console.log(enteredPassword);
 };
 module.exports = mongoose.model("user", User);

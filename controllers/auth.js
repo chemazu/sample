@@ -35,5 +35,21 @@ exports.login = asyncHandler(async (req, res, next) => {
     next(new ErrorResponse("invalid credentials password", 401));
   }
 
-  res.status(200).json({ success: "true", token });
+  // res.status(200).json({ success: "true", token });
+  sendTokenResponse(user, 200, res);
 });
+//get token,create a cookie and send cookie
+
+const sendTokenResponse = (user, statusCode, res) => {
+  const token = user.getSignedJwtToken();
+  const options = {
+    expires: new Date(
+      Date.now() + process.env.JWT_COOKIE_EXPIRE * 24 * 60 * 60 * 1000
+    ),
+    httpOnly: true,
+  };
+  res
+    .status(statusCode)
+    .cookie("token", token, options)
+    .json({ success: true, token });
+};

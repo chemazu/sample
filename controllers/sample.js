@@ -15,7 +15,6 @@ exports.createSample = async (req, res, next) => {
     res.status(201).json({ success: true, data: newSample });
   } catch (error) {
     next(new ErrorResponse(`Error in creating new Sample`, 500));
-    console.log(error);
   }
 };
 
